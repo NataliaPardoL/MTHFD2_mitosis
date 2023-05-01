@@ -426,8 +426,8 @@ volcano_top_df <- nuclear_interactors_Area_unique %>%
     mutate(BFDR2 = abs(jitter(BFDR, factor = 1))) %>%
     mutate(log2FC = log2(FoldChange), `-log10(BFDR)` = -log10(BFDR2)) %>%
     left_join(top_genes_anot_df, by = "Gene_name") %>%
-    mutate(label = ifelse(Gene_name %in% c("MTHFD2", "TPR", "MAD1L1", "KIF4A", "PRMT1", 
-                                           "PRKAA1", "KMT5A", "DNMT3B"), Gene_name, ""))
+    mutate(label = ifelse(Gene_name %in% c("MTHFD2", "TPR", "MAD1L1", "KIF4A", "PRMT1", "PRKAA1", 
+                                           "PRKAB1", "PRKAG1", "PRKAG2", "KMT5A", "DNMT3B"), Gene_name, ""))
 
 # plot volcano - top
 ggplot(volcano_top_df, aes(x = log2FC, y = `-log10(BFDR)`)) +

@@ -68,7 +68,7 @@ table(h3pser_alldata$Replicate, h3pser_alldata$Column)
 
 # add condition
 mitosis_quant_cond <- h3pser_alldata %>%
-    mutate(Cell_Line = case_when(,
+    mutate(Cell_Line = case_when(
         (Row == 2 | Row == 3) & Plate == "HCT116" ~ "HCT116",
         (Row == 2 | Row == 3) & Plate == "HAP1_HCT116" ~ "HAP1-WT",
         (Row == 4 | Row == 5) & Plate == "HAP1_HCT116" ~ "HAP1-mut",
@@ -90,9 +90,9 @@ table(mitosis_quant_cond$Row, mitosis_quant_cond$Cell_Line)
 table(mitosis_quant_cond$Replicate, mitosis_quant_cond$Drug)  
 table(mitosis_quant_cond$Column, mitosis_quant_cond$Drug)  
 
-# remove first and last concentration because no 3 replicates
+# concentrations 25 and 63
 mitosis_quant_cond2 <- mitosis_quant_cond %>%
-    filter(Drug != 391 & Drug != 10 )
+    filter(Drug %in% c(0,25,63))
 table(mitosis_quant_cond2$Column, mitosis_quant_cond2$Drug)  
 
 # select HCT116 data
@@ -260,11 +260,8 @@ group_25 <- mitotic_perc_info_sc_HCT_norm %>%
     filter(Drug == 25)
 group_63 <- mitotic_perc_info_sc_HCT_norm %>%
     filter(Drug == 63)
-group_156 <- mitotic_perc_info_sc_HCT_norm %>%
-    filter(Drug == 156)
 shapiro.test(group_25$perc_mitosis_norm)
 shapiro.test(group_63$perc_mitosis_norm)
-shapiro.test(group_156$perc_mitosis_norm) 
 
 # check homogeneity of variance -> yes
 leveneTest(perc_mitosis_norm ~ Drug, data=mitotic_perc_info_sc_HCT_norm)
@@ -274,8 +271,6 @@ t.test(mitotic_perc_info_sc_HCT_norm$perc_mitosis_norm[mitotic_perc_info_sc_HCT_
        mu = 1, alternative = "two.sided") # pval 0.05397
 t.test(mitotic_perc_info_sc_HCT_norm$perc_mitosis_norm[mitotic_perc_info_sc_HCT_norm$Drug == 63], 
        mu = 1, alternative = "two.sided") # pval 0.006727
-t.test(mitotic_perc_info_sc_HCT_norm$perc_mitosis_norm[mitotic_perc_info_sc_HCT_norm$Drug == 156], 
-       mu = 1, alternative = "two.sided") # pval 0.6566
 
 # ggplot data
 ggplot() +
@@ -290,7 +285,7 @@ ggplot() +
                 height = 0, width = 0.1, alpha = 1, size = 1.5) +
     xlab("TH9619 Inhibitor (nM)") +
     ylab("Proportion of mitotic cells \n normalized to DMSO condition") +
-    scale_y_continuous(expand=c(0,0), limits = c(0,2)) +
+    scale_y_continuous(expand=c(0,0), limits = c(0,1.5)) +
     theme_classic() +
     theme(axis.text = element_text(size = 11), 
           axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0), size = 12),

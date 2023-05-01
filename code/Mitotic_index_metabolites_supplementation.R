@@ -499,41 +499,112 @@ t.test(perc_mitotic ~ Metabolite, data=group_K2_DMSO_FolH, var.equal = TRUE) # n
 t.test(perc_mitotic ~ Metabolite, data=group_K2_DMSO_THFH, var.equal = TRUE) # yes
 t.test(perc_mitotic ~ Metabolite, data=group_K2_DMSO_SAMH, var.equal = TRUE) # yes
 
-# 5. Plot normalised with DMSO --------------------------------------------------------------
+# 5. Plot normalized with DMSO --------------------------------------------------------------
 
-# normalize to DMSO condition
-WT_DMSO_low_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
-                                                               mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                               mitotic_perc_info_sc$Level == "Low"])
-KO1_DMSO_low_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
-                                                                mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                                mitotic_perc_info_sc$Level == "Low"])
-KO2_DMSO_low_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
-                                                                mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                                mitotic_perc_info_sc$Level == "Low"])
+# normalized with DMSO
+WT_DMSO_low_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                       mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                       mitotic_perc_info_sc$Level == "Low" &
+                                                       mitotic_perc_info_sc$Replicate == 1]
+WT_DMSO_low_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                       mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                       mitotic_perc_info_sc$Level == "Low"&
+                                                       mitotic_perc_info_sc$Replicate == 2]
+WT_DMSO_low_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                       mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                       mitotic_perc_info_sc$Level == "Low"&
+                                                       mitotic_perc_info_sc$Replicate == 3]
 
-WT_DMSO_high_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
-                                                                mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                                mitotic_perc_info_sc$Level == "High"])
-KO1_DMSO_high_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
-                                                                 mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                                 mitotic_perc_info_sc$Level == "High"])
-KO2_DMSO_high_mean <- mean(mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
-                                                                 mitotic_perc_info_sc$Metabolite == "DMSO" &
-                                                                 mitotic_perc_info_sc$Level == "High"])
+KO1_DMSO_low_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low" &
+                                                        mitotic_perc_info_sc$Replicate == 1]
+KO1_DMSO_low_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low"&
+                                                        mitotic_perc_info_sc$Replicate == 2]
+KO1_DMSO_low_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low"&
+                                                        mitotic_perc_info_sc$Replicate == 3]
 
-mitotic_perc_info_sc_norm <- mitotic_perc_info_sc %>%
+KO2_DMSO_low_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low" &
+                                                        mitotic_perc_info_sc$Replicate == 1]
+KO2_DMSO_low_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low"&
+                                                        mitotic_perc_info_sc$Replicate == 2]
+KO2_DMSO_low_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "Low"&
+                                                        mitotic_perc_info_sc$Replicate == 3]
+
+WT_DMSO_high_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "High" &
+                                                        mitotic_perc_info_sc$Replicate == 1]
+WT_DMSO_high_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "High"&
+                                                        mitotic_perc_info_sc$Replicate == 2]
+WT_DMSO_high_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "WT" &
+                                                        mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                        mitotic_perc_info_sc$Level == "High"&
+                                                        mitotic_perc_info_sc$Replicate == 3]
+
+KO1_DMSO_high_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High" &
+                                                         mitotic_perc_info_sc$Replicate == 1]
+KO1_DMSO_high_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High"&
+                                                         mitotic_perc_info_sc$Replicate == 2]
+KO1_DMSO_high_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO1" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High"&
+                                                         mitotic_perc_info_sc$Replicate == 3]
+
+KO2_DMSO_high_1 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High" &
+                                                         mitotic_perc_info_sc$Replicate == 1]
+KO2_DMSO_high_2 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High"&
+                                                         mitotic_perc_info_sc$Replicate == 2]
+KO2_DMSO_high_3 <- mitotic_perc_info_sc$perc_mitotic[mitotic_perc_info_sc$Condition == "KO2" &
+                                                         mitotic_perc_info_sc$Metabolite == "DMSO" &
+                                                         mitotic_perc_info_sc$Level == "High"&
+                                                         mitotic_perc_info_sc$Replicate == 3]
+
+mitotic_perc_info_sc_norm_byrep <- mitotic_perc_info_sc %>%
     mutate(perc_mitotic_norm = case_when(
-        Condition == "WT" & Level == "Low" ~ perc_mitotic/WT_DMSO_low_mean,
-        Condition == "KO1" & Level == "Low" ~ perc_mitotic/KO1_DMSO_low_mean,
-        Condition == "KO2" & Level == "Low" ~ perc_mitotic/KO2_DMSO_low_mean,
-        Condition == "WT" & Level == "High" ~ perc_mitotic/WT_DMSO_high_mean,
-        Condition == "KO1" & Level == "High" ~ perc_mitotic/KO1_DMSO_high_mean,
-        Condition == "KO2" & Level == "High" ~ perc_mitotic/KO2_DMSO_high_mean),
+        Condition == "WT" & Level == "Low" & Replicate == 1 ~ perc_mitotic/WT_DMSO_low_1,
+        Condition == "WT" & Level == "Low" & Replicate == 2 ~ perc_mitotic/WT_DMSO_low_2,
+        Condition == "WT" & Level == "Low" & Replicate == 3 ~ perc_mitotic/WT_DMSO_low_3,
+        Condition == "KO1" & Level == "Low" & Replicate == 1 ~ perc_mitotic/KO1_DMSO_low_1,
+        Condition == "KO1" & Level == "Low" & Replicate == 2 ~ perc_mitotic/KO1_DMSO_low_2,
+        Condition == "KO1" & Level == "Low" & Replicate == 3 ~ perc_mitotic/KO1_DMSO_low_3,
+        Condition == "KO2" & Level == "Low" & Replicate == 1 ~ perc_mitotic/KO2_DMSO_low_1,
+        Condition == "KO2" & Level == "Low" & Replicate == 2 ~ perc_mitotic/KO2_DMSO_low_2,
+        Condition == "KO2" & Level == "Low" & Replicate == 3 ~ perc_mitotic/KO2_DMSO_low_3,
+        
+        Condition == "WT" & Level == "High" & Replicate == 1 ~ perc_mitotic/WT_DMSO_high_1,
+        Condition == "WT" & Level == "High" & Replicate == 2 ~ perc_mitotic/WT_DMSO_high_2,
+        Condition == "WT" & Level == "High" & Replicate == 3 ~ perc_mitotic/WT_DMSO_high_3,
+        Condition == "KO1" & Level == "High" & Replicate == 1 ~ perc_mitotic/KO1_DMSO_high_1,
+        Condition == "KO1" & Level == "High" & Replicate == 2 ~ perc_mitotic/KO1_DMSO_high_2,
+        Condition == "KO1" & Level == "High" & Replicate == 3 ~ perc_mitotic/KO1_DMSO_high_3,
+        Condition == "KO2" & Level == "High" & Replicate == 1 ~ perc_mitotic/KO2_DMSO_high_1,
+        Condition == "KO2" & Level == "High" & Replicate == 2 ~ perc_mitotic/KO2_DMSO_high_2,
+        Condition == "KO2" & Level == "High" & Replicate == 3 ~ perc_mitotic/KO2_DMSO_high_3),
         MetaboliteLevel = ifelse(Level == "Low", paste0(Metabolite,"L"), paste0(Metabolite,"H")))
 
 # statistic summary
-mitotic_perc_stats_sc_norm <- mitotic_perc_info_sc_norm %>%
+mitotic_perc_stats_sc_norm_byrep <- mitotic_perc_info_sc_norm_byrep %>%
     group_by(Condition, MetaboliteLevel) %>%
     summarise(
         count = n(),
@@ -548,12 +619,24 @@ my_comparisons <- list(c("DMSOL", "FormateL"), c("DMSOL", "FolateL"), c("DMSOL",
                        c("DMSOH", "FormateH"), c("DMSOH", "FolateH"), c("DMSOH", "meTHFH"),
                        c("DMSOH", "SAMH"))
 
+mitotic_perc_stats_sc_norm_byrep$MetaboliteLevel <- factor(mitotic_perc_stats_sc_norm_byrep$MetaboliteLevel, 
+                                                           levels = c("DMSOL", "DMSOH", "FormateL", "FormateH",
+                                                                      "FolateL", "FolateH", "meTHFL", "meTHFH",
+                                                                      "SAML", "SAMH"))
+mitotic_perc_info_sc_norm_byrep$MetaboliteLevel <- factor(mitotic_perc_info_sc_norm_byrep$MetaboliteLevel, 
+                                                          levels = c("DMSOL", "DMSOH", "FormateL", "FormateH",
+                                                                     "FolateL", "FolateH", "meTHFL", "meTHFH",
+                                                                     "SAML", "SAMH"))
+
 ggplot() +
-    geom_errorbar(data = mitotic_perc_stats_sc_norm, aes(x=MetaboliteLevel, ymin=mean_mit-sd_mit, ymax=mean_mit+sd_mit), 
+    geom_errorbar(data = mitotic_perc_stats_sc_norm_byrep, aes(x=MetaboliteLevel, ymin=mean_mit-sd_mit, 
+                                                               ymax=mean_mit+sd_mit), 
                   width=.2,
                   position=position_dodge(0.05)) +
-    geom_col(data = mitotic_perc_stats_sc_norm, aes(x=MetaboliteLevel, y=mean_mit, fill = Condition), width = 0.5)+
-    geom_jitter(data = mitotic_perc_info_sc_norm, aes(x=MetaboliteLevel, y=perc_mitotic_norm), height = 0, width = 0.1, alpha = 1, size = 1.5)+
+    geom_col(data = mitotic_perc_stats_sc_norm_byrep, aes(x=MetaboliteLevel, y=mean_mit, fill = Condition), 
+             width = 0.5)+
+    geom_jitter(data = mitotic_perc_info_sc_norm_byrep, aes(x=MetaboliteLevel, y=perc_mitotic_norm), 
+                height = 0, width = 0.1, alpha = 1, size = 1.5)+
     stat_compare_means(comparisons = my_comparisons, method = "t.test") +
     facet_wrap(~Condition, nrow = 3) +
     xlab("") +
@@ -568,4 +651,115 @@ ggplot() +
           panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           legend.position = "none"
     )
-ggsave("plots/perc_mitotic_cells_bar_pval_scaled_low_high.pdf", width = 6, height = 5)
+ggsave("plots/perc_mitotic_cells_bar_pval_scaled_low_high_byrep.pdf", width = 6, height = 5)
+
+# statistics one sample t test low
+
+# t-test low WT
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
+
+
+# t-test low KO1
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
+
+# t-test low KO2
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "Low" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
+
+# t-test high WT
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "WT" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
+
+# t-test high KO1
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO1" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
+
+# t-test high KO2
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Formate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "Folate"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "meTHF"], 
+       mu = 1, alternative = "two.sided") 
+t.test(mitotic_perc_info_sc_norm_byrep$perc_mitotic_norm[mitotic_perc_info_sc_norm_byrep$Condition == "KO2" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Level == "High" 
+                                                         & mitotic_perc_info_sc_norm_byrep$Metabolite == "SAM"], 
+       mu = 1, alternative = "two.sided") 
